@@ -1,0 +1,9 @@
+body {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  background-color: #eee;
+}
+
+.sign-in-heading {
+  text-align: center;
+}

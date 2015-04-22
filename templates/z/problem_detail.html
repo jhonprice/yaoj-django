@@ -1,0 +1,56 @@
+{% extends "z/base.html" %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/css/problem.css">
+{% endblock %}
+
+{% block title %}
+{{ problem.title }}
+{% endblock %}
+
+{% block content %}
+<div id="problem-info"  align="center">
+    <h1>{{ problem.title }}</h1><br>
+    <div class="problem-statistic">
+        <span class="glyphicon glyphicon-time" ></span> Time Limit: {{ problem.time_limit }} ms
+    </div>
+    <div class="problem-statistic">
+        <span class="glyphicon glyphicon-th-large"></span> Memory Limit: {{ problem.mem_limit }} MB
+    </div>
+</div>
+
+<div class="problem">
+    <div class="problem-widget">
+        <div class="problem-widget-title">Problem Description</div>
+        <div class="problem-widget-content markdown">{{ problem.desc }}</div>
+    </div>
+
+    <div class="problem-widget">
+        <div class="problem-widget-title">Input</div>
+        <div class="problem-widget-content markdown">{{ problem.input_spec }}</div>
+    </div>
+
+    <div class="problem-widget">
+        <div class="problem-widget-title">Output</div>
+        <div class="problem-widget-content markdown">{{ problem.output_spec }}</div>
+    </div>
+
+    <div class="problem-widget">
+        <div class="problem-widget-title">Sample Input</div>
+        <div class="problem-widget-content"><pre>{{ problem.sample_input }}</pre></div>
+    </div>
+
+    <div class="problem-widget">
+        <div class="problem-widget-title">Sample Output</div>
+        <div class="problem-widget-content">
+        <pre>{{ problem.sample_output }}</pre>
+        </div>
+    </div>
+
+    </div>
+
+    <div align="center">
+        <a href="{% url 'z:problem_submit' problem.id %}" class="btn btn-success" role="button">Submit</a>
+        <a href="{% url 'z:problem_status' problem.id %}" class="btn btn-success" role="button">Status</a>
+    </div>
+{% endblock %}

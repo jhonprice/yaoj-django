@@ -1,0 +1,9 @@
+{% extends "z/base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% load z_extra %}
+
+{% block content %}
+{{ content | markdown | safe }}
+{% endblock %}

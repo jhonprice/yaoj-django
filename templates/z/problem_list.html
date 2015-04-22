@@ -1,0 +1,33 @@
+{% extends "z/base.html" %}
+
+{% block title %}Problem List{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+    <h1 class="text-center">Problems</h1>
+
+    <table class="table table-hover table-striped">
+
+        <thead>
+        <tr>
+            <th style="width: 200px; border-color: rgb(102, 204, 255);">Problem ID</th>
+            <th style="width: 200px; border-color: rgb(102, 204, 255);">Problem Title</th>
+            <th style="width: 200px; border-color: rgb(102, 204, 255);">Ratio(Accepted/Submissions)</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for problem in problems %}
+            <tr onmouseover="this.style.cursor='pointer'" onclick="document.location = '{% url 'z:problem_detail' problem.id %}';">
+                <th style="width: 200px; border-color: rgb(102, 204, 255);">{{ problem.id }}</th>
+                <th style="width: 200px; border-color: rgb(102, 204, 255);">{{ problem.title }}</th>
+                <th style="width: 200px; border-color: rgb(102, 204, 255);">{{ problem.ac_ratio | floatformat:2 }}%({{ problem.ac_count }}/{{ problem.submission_count }})</th>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+</div>
+{% endblock %}

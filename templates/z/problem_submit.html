@@ -1,0 +1,24 @@
+{% extends "z/base.html" %}
+
+{% block title %}
+{{ problem.title }} - Submit
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center text-info">Submit Your Solution</h1>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+        <textarea name="src" class="form-control" rows="20"></textarea>
+        </div>
+        <div align="center">
+        <input class="btn btn-default" type="submit" value="Submit">
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock %}
+

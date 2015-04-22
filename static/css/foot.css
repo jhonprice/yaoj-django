@@ -1,0 +1,28 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding-top: 50px;
+}
+
+.container {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -60px;
+}
+
+.push {
+    height: 60px;
+    clear:both;
+}
+
+.starter {
+    height: 60px;
+    clear:both;
+    padding :20px 15px;
+    text-align: center;
+}
