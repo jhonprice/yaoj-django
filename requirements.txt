@@ -5,3 +5,4 @@ Pygments >= 2.0.2
 celery >= 3.1.17
 redis >= 2.10.3
 hiredis >= 0.2
+psutil >= 2.2.1

@@ -63,10 +63,17 @@ class Submission(models.Model):
     author = models.ForeignKey(Member)
     problem = models.ForeignKey(Problem)
     create_time = models.DateTimeField(auto_now_add=True)
-    mem_consumed = models.IntegerField('memory consumed(in MB)')
-    time_consumed = models.IntegerField('time consumed(in ms)')
-    verdict = models.CharField(max_length=32)
+    mem_consumed = models.IntegerField('memory consumed(in MB)', default=0)
+    time_consumed = models.IntegerField('time consumed(in ms)', default=0)
+    verdict = models.CharField(max_length=32, default='')
+    # 'pending', 'processing', 'done'
+    state = models.CharField(max_length=16, default='pending')
     source_code = models.TextField()
+
+    def set_verdict(self, v):
+        self.verdict = v
+        self.state = 'done'
+        self.save()
 
 
 class StaticPage(models.Model):

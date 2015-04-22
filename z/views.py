@@ -4,7 +4,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
-from .models import Problem, StaticPage
+from .models import Problem, StaticPage, Submission
+from .judge import judge
 
 
 def index(request):
@@ -33,6 +34,10 @@ def problem_submit(request, problem_id):
     if request.method == 'GET':
         return render(request, 'z/problem_submit.html', {'problem': problem})
     else:
+        s = Submission(author=request.user.member, problem=problem,
+                       source_code=request.POST['src'])
+        s.save()
+        judge.delay(s.id)
         return redirect(reverse('z:problem_status', args=(problem_id, )))
 
 
