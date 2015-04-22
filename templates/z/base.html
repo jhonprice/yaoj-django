@@ -36,11 +36,18 @@
                 <li><a href="{% url 'z:problem_list' %}">Problem Set</a></li>
                 <li><a href="">Contest</a></li>
                 <li><a href="">Contribute</a></li>
-                <li>{{ request.user }}</li>
             </ul>
-            <div class="navbar-form navbar-right">
-                <a href="../registration/login.html" class=" btn btn-success" role="button">Sign in</a>
+
+            {% if request.user.is_active %}
+            <div class="nav navbar-nav navbar-right">
+                <p class="navbar-text">{{ request.user }}    | <a href="/logout/">Sign Out</a></p>
             </div>
+            {% else %}
+            <div class="navbar-form navbar-right">
+                <a href="/login/" class=" btn btn-success" role="button">Sign in</a>
+            </div>
+            {% endif %}
+
         </div>
     </div>
 </nav>
