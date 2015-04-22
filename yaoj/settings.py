@@ -72,11 +72,11 @@ WSGI_APPLICATION = 'yaoj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'yaoj',
-        'USER': 'jiang',
+        'NAME': 'postgres',
+        'USER': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432',
-        'PASSWORD': None,
+        'PASSWORD': 'password',
     }
 }
 
