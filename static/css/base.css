@@ -1,0 +1,14 @@
+/* remove outline */
+input, textarae {
+  outline: none;
+}
+/* clear float */
+.clear {
+  clear: both;
+}
+/* container */
+.container {
+  margin: 0 auto;
+
+  width: 960px;
+}
