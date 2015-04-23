@@ -10,13 +10,6 @@ from .container import Container
 
 app = Celery('judge')
 
-app.conf.update(
-    CELERY_TIMEZONE='Asia/Shanghai',
-    CELERYD_CONCURRENCY=2,
-    BROKER_URL='redis://localhost:6379/0',
-    CELERY_RESULT_BACKEND='redis://localhost:6379/1',
-)
-
 
 def ensure_cleanup(fn):
     @functools.wraps(fn)
