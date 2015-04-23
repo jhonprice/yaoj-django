@@ -1,14 +1,11 @@
 import os
 import functools
 
-from celery import Celery
+from celery import task
 from psutil import Process
 
 from .models import Submission
 from .container import Container
-
-
-app = Celery('judge')
 
 
 def ensure_cleanup(fn):
@@ -19,12 +16,12 @@ def ensure_cleanup(fn):
     return wrapper
 
 
-@app.task
+@task
 @ensure_cleanup
 def judge(submission_id):
     s = Submission.objects.get(pk=submission_id)
     p = s.problem
-    c = Container(s.id)
+    c = Container('c{}'.format(s.id))
     c.init()
     dump_src(s.id, s.source_code)
     dump_test(c.root, p.test_input)

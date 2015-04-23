@@ -1,11 +1,9 @@
-from logging import getLogger
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
 from .models import Problem, StaticPage, Submission
-from .judge import judge
+from .tasks import judge
 
 
 def index(request):
