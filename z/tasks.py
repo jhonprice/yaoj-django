@@ -24,7 +24,7 @@ def judge(submission_id):
     c = Container('c{}'.format(s.id))
     c.init()
     dump_src(s.id, s.source_code)
-    dump_test(c.root, p.test_input)
+    dump_test(c.rootfs, p.test_input)
 
     if not make(c.rootfs, s.id):
         s.set_verdict('compilation error')
@@ -61,13 +61,13 @@ def judge(submission_id):
 
 def dump_src(s_id, src):
     """dump source code to a tmp file"""
-    with open('/tmp/{}.cpp'.format(s_id)) as f:
+    with open('/tmp/{}.cpp'.format(s_id), 'w') as f:
         f.write(src)
 
 
 def dump_test(c_root, test_input):
     """dump test input to container's filesystem"""
-    with open(c_root + '/test.in') as f:
+    with open(c_root + '/test.in', 'w') as f:
         f.write(test_input)
 
 
