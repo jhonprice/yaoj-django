@@ -15,6 +15,7 @@ class Container(lxc.Container):
         self.create("download", lxc.LXC_CREATE_QUIET, {"dist": "ubuntu",
                                                        "release": "trusty",
                                                        "arch": "amd64"})
+        self.start()
 
     def cleanup(self):
         self.stop()
