@@ -18,6 +18,9 @@ class Container(lxc.Container):
         self.stop()
         self.destroy()
 
+    def run_cmd(self, cmd):
+        return self.attach(lxc.attach_run_command, cmd)
+
     @property
     def running_time(self):
         return int(self.get_cgroup_item('cpuacct.usage'))/1000

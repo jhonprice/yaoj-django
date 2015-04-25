@@ -33,7 +33,7 @@ def judge(submission_id):
         return c
 
     c.clear_timer()
-    pid = c.attach('/{} < test.in > test.out')
+    pid = c.run_cmd(['/{} < test.in > test.out'.format(submission_id)])
     process = Process(pid)
     time_limit = p.time_limit
 
