@@ -41,6 +41,6 @@ def problem_submit(request, problem_id):
 
 def problem_status(request, problem_id):
     problem = get_object_or_404(Problem, pk=problem_id)
-    submissions = problem.submission_set
+    submissions = problem.submission_set.all()
     return render(request, 'z/problem_status.html', {'problem': problem,
                                                      'submissions': submissions})
