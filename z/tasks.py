@@ -20,6 +20,8 @@ def ensure_cleanup(fn):
 @ensure_cleanup
 def judge(submission_id):
     s = Submission.objects.get(pk=submission_id)
+    s.state = 'processing'
+    s.save()
     p = s.problem
     c = Container('c{}'.format(s.id))
     c.init()
