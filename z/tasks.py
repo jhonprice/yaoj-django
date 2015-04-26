@@ -22,6 +22,7 @@ def judge(submission_id):
     s = Submission.objects.get(pk=submission_id)
     s.state = 'processing'
     s.save()
+
     p = s.problem
     c = Container('c{}'.format(s.id))
     c.init()
@@ -32,8 +33,9 @@ def judge(submission_id):
         s.set_verdict('compilation error')
         return c
 
+    c.run_cmd(['chmod', 'a+x', 'run.sh'])
     c.clear_timer()
-    pid = c.run_cmd(['/{} < test.in > test.out'.format(submission_id)])
+    pid = c.run_cmd(['./run.sh'])
     process = Process(pid)
     time_limit = p.time_limit
 
@@ -50,10 +52,10 @@ def judge(submission_id):
 
     test_output = p.test_output.split('\n\r')
 
-    with open(c.rootfs+'/test.out') as f:
+    with open(os.path.join(c.rootfs, 'test.out')) as f:
         i = 0
         for line in f:
-            if line != test_output[i]:
+            if line.strip() != test_output[i]:
                 s.set_verdict('wrong answer')
                 return c
             i += 1
@@ -65,12 +67,20 @@ def dump_src(s_id, src):
     """dump source code to a tmp file"""
     with open('/tmp/{}.cpp'.format(s_id), 'w') as f:
         f.write(src)
+        f.write('\n')
 
 
 def dump_test(c_root, test_input):
     """dump test input to container's filesystem"""
-    with open(c_root + '/test.in', 'w') as f:
+    with open(os.path.join(c_root, 'test.in'), 'w') as f:
         f.write(test_input)
+        f.write('\n')
+
+
+def dump_script(c_root):
+    with open(os.path.join(c_root, 'run.sh'), 'w') as f:
+        f.write('''#!/usr/bin/env bash
+                   ./a.out < test.in > test.out''')
 
 
 def make(c_root, s_id):
@@ -79,7 +89,8 @@ def make(c_root, s_id):
     s_id: submission id
 
     compile source code"""
-    cmd = 'clang++ -std=c++11 /tmp/{}.cpp -o {}/{}'.format(s_id, c_root, s_id)
+    cmd = ('clang++ -std=c++11 /tmp/{}.cpp -o {}'
+           ).format(s_id, os.path.join(c_root, 'a.out'))
     pipe = os.popen(cmd)
     return pipe.close() is None
 

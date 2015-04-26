@@ -1,3 +1,5 @@
+import os
+
 import lxc
 
 
@@ -38,7 +40,7 @@ class Container(lxc.Container):
 
     @property
     def rootfs(self):
-        return self.get_config_item('lxc.rootfs')
+        return os.path.join(self.get_config_item('lxc.rootfs'), 'root')
 
 
 def list_containers():
