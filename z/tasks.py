@@ -41,7 +41,7 @@ def judge(submission_id):
     time_limit = p.time_limit
 
     while True:
-        if sum(process.cpu_times()) > time_limit or not process.is_running():
+        if c.running_time > time_limit or not process.is_running():
             break
 
     if c.running_time() > time_limit:
