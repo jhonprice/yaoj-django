@@ -75,6 +75,10 @@ class Submission(models.Model):
         self.state = 'done'
         self.save()
 
+    def set_state(self, s):
+        self.state = s
+        self.save()
+
 
 class StaticPage(models.Model):
     slug = models.SlugField(max_length=32)
