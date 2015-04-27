@@ -81,7 +81,7 @@ def dump_test(c_root, test_input):
 def dump_script(c_root):
     with open(os.path.join(c_root, 'run.sh'), 'w') as f:
         f.write('''#!/usr/bin/env bash
-                   ./a.out < test.in > test.out''')
+                   /root/a.out < /root/test.in > /root/test.out''')
 
 
 def make(c_root, s_id):
