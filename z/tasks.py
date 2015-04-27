@@ -28,6 +28,7 @@ def judge(submission_id):
     c.init()
     dump_src(s.id, s.source_code)
     dump_test(c.rootfs, p.test_input)
+    dump_script(c.rootfs)
 
     if not make(c.rootfs, s.id):
         s.set_verdict('compilation error')
