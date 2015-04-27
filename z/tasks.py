@@ -34,9 +34,9 @@ def judge(submission_id):
         s.set_verdict('compilation error')
         return c
 
-    c.run_cmd(['chmod', 'a+x', 'run.sh'])
+    c.run_cmd(['chmod', 'a+x', os.path.join(c.rootfs, 'run.sh')])
     c.clear_timer()
-    pid = c.run_cmd(['./run.sh'])
+    pid = c.run_cmd([os.path.join(c.rootfs, 'run.sh')])
     process = Process(pid)
     time_limit = p.time_limit
 
