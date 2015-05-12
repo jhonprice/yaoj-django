@@ -45,7 +45,7 @@ class Problem(models.Model):
 
     @property
     def ac_count(self):
-        return self.submission_set.filter(verdict='Accepted').count()
+        return self.submission_set.filter(verdict='accepted').count()
 
     @property
     def submission_count(self):
@@ -54,7 +54,7 @@ class Problem(models.Model):
     @property
     def ac_ratio(self):
         try:
-            return self.ac_count/self.submission_count
+            return (self.ac_count * 100) / self.submission_count
         except ZeroDivisionError:
             return 0
 
